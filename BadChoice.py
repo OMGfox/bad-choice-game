@@ -1,13 +1,17 @@
 #!/usr/bin/env python3
+from elements.engine import GameCycle
+from elements.primitives import GameField
 
 
 class BadChoice():
-    def __init__(self):
-        pass
+    def __init__(self, field_size: tuple):
+        self.field = GameField(field_size)
+        self.game_cycle = GameCycle(self.field)
 
     def start(self):
-        pass
+        self.game_cycle.run()
 
 
 if __name__ == '__main__':
-    BadChoice().start()
+    field_size = (300, 100)
+    BadChoice(field_size).start()
