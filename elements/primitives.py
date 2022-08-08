@@ -1,3 +1,5 @@
+import math
+
 import pygame
 
 
@@ -40,27 +42,18 @@ class GameField():
         field_width = self.size[0]
         field_height = self.size[1]
         amount_boxes = len(self.elements)
-        offset_x = 0
-        offset_y = 0
-        if amount_boxes * field_height <= field_width:
-            offset_x = (field_width - amount_boxes * field_height) / 2
-            offset_y = 0
-            width = height = field_height
-            for n, element in enumerate(self.elements):
-                x = offset_x + (n * width)
-                y = offset_y
-                element.set_coord(x, y)
-                element.set_size(width, height)
-        elif amount_boxes * field_height > field_width and amount_boxes <= 8:
-            height = width = field_width // amount_boxes
-            offset_x = (field_width - amount_boxes * width) / 2
-            offset_y = (field_height - height) / 2
-            for n, element in enumerate(self.elements):
-                x = offset_x + (n * width)
-                y = offset_y
-                element.set_coord(x, y)
-                element.set_size(width, height)
-        print([element.coord for element in self.elements])
+        rows = cols = math.sqrt(amount_boxes)
+        box_width = field_width / rows
+        box_height = field_height / cols
+        box_x = 0
+        box_y = 0
+        for n, elem in enumerate(self.elements):
+            if n % cols == 0 and n > 0:
+                box_x = 0
+                box_y += box_height
+            elem.set_coord(box_x, box_y)
+            elem.set_size(box_width, box_height)
+            box_x += box_width
 
     def draw(self):
         self.screen.fill((0, 0, 0))

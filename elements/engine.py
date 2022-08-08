@@ -1,4 +1,4 @@
-import os
+import math
 import sys
 import pygame
 from elements.primitives import GameField
@@ -8,7 +8,7 @@ class GameCycle():
     def __init__(self, game_field: GameField):
         self.game_field = game_field
         self.logic = GameLogic(self)
-        self.level = 3
+        self.level = 10
         self.run()
 
     def run(self):
@@ -33,7 +33,7 @@ class GameLogic():
     def create_boxes(self):
         level = self.game_cycle.level
         amount_boxes = len(self.game_field.elements)
-        for i in range(level - amount_boxes):
+        for i in range(int(math.pow(level, 2) - amount_boxes)):
             self.game_field.add_box()
 
     def box_click_down(self):
