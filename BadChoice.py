@@ -13,5 +13,5 @@ class BadChoice():
 
 
 if __name__ == '__main__':
-    field_size = (800, 800)
+    field_size = (600, 600)
     BadChoice(field_size).start()

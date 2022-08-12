@@ -9,11 +9,28 @@ class Box():
         self.width = 100
         self.height = 100
         self.color = (255, 255, 255)
+        self.border_color = (0, 0, 0)
+        self.is_bad = False
+        self.value = 1
         self.screen = screen
 
     def draw(self):
+        if self.is_bad :
+            self.color = (255, 0, 0)
         pygame.draw.rect(surface=self.screen,
                          color=self.color,
+                         border_radius=10,
+                         rect=pygame.Rect(self.coord[0],
+                                          self.coord[1],
+                                          self.width,
+                                          self.height))
+        self.__draw_border()
+
+    def __draw_border(self):
+        pygame.draw.rect(surface=self.screen,
+                         color=self.border_color,
+                         border_radius=10,
+                         width=1,
                          rect=pygame.Rect(self.coord[0],
                                           self.coord[1],
                                           self.width,
