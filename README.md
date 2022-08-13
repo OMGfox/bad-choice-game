@@ -4,6 +4,7 @@ Choose the good one and get the points.
 
 
 TODO
-1) Score
-2) Add the difficulty level selection
-3) ...
+1) Add the difficulty level selection
+2) Main menu
+3) "Game Over"
+4) "Restart Game"
