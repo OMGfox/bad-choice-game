@@ -102,12 +102,18 @@ class GameLogic():
         self.game_cycle.score = 0
         self.game_field.elements.clear()
         self.create_boxes()
+        self.game_field.score_panel.set_color((100, 100, 100))
 
     def add_score(self):
         self.game_cycle.score += self.game_cycle.selected_box.value
+        self.game_field.score_panel.set_score(self.game_cycle.score)
+        if self.game_cycle.selected_box.value > 0:
+            color = (0, 255, 0)
+        else:
+            color = (255, 0, 0)
+        self.game_field.score_panel.set_color(color)
 
     def is_game_over(self) -> bool:
-        print(self.game_cycle.score)
         if self.game_cycle.score < 0:
             return True
         else:

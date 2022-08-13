@@ -1,6 +1,6 @@
 import math
-
 import pygame
+import elements.config as config
 
 
 class Box():
@@ -27,7 +27,8 @@ class Box():
                                           self.width,
                                           self.height))
         self.__draw_border()
-        self.__draw_value()
+        if config.DEBUG:
+            self.__draw_value()
 
     def __draw_border(self):
         pygame.draw.rect(surface=self.screen,
@@ -62,6 +63,7 @@ class ScorePanel():
         self.game_field = game_field
         self.color = (100, 100, 100)
         self.coord = (0, 0)
+        self.score = 0
 
     def draw(self):
         color = self.color
@@ -72,6 +74,21 @@ class ScorePanel():
                                           self.screen.get_width(),
                                           self.game_field.top_offset))
         self.__draw_border()
+        self.__draw_score()
+
+    def set_score(self, score):
+        self.score = score
+
+    def set_color(self, color):
+        self.color = color
+
+    def __draw_score(self):
+        self.font = pygame.font.SysFont(None, 96)
+        color = (255, 255, 255)
+        value_surface = self.font.render(str(self.score), True, color)
+        score_width = self.font.render("0", True, color).get_width() * len(str(self.score))
+        resized_score_surface = pygame.transform.scale(value_surface, (score_width, self.game_field.top_offset - 1))
+        self.screen.blit(resized_score_surface, (self.coord[0], self.coord[1]))
 
     def __draw_border(self):
         pass
